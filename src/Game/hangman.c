@@ -196,7 +196,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                                      \n");
         printf("                   -------||          \n");
         printf("                   O      ||          \n");
-        printf("                  / \     ||          \n");
+        printf("                  / \'    ||          \n");
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
@@ -206,7 +206,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                                      \n");
         printf("                   -------||          \n");
         printf("                   O      ||          \n");
-        printf("                  /|\     ||          \n");
+        printf("                  /|\'    ||          \n");
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
@@ -216,7 +216,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                                      \n");
         printf("                   -------||          \n");
         printf("                   O      ||          \n");
-        printf("                  /|\     ||          \n");
+        printf("                  /|\'    ||          \n");
         printf("                  /       ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
@@ -226,8 +226,8 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                                      \n");
         printf("                   -------||          \n");
         printf("                   O      ||          \n");
-        printf("                  /|\     ||          \n");
-        printf("                  / \     ||          \n");
+        printf("                  /|\'    ||          \n");
+        printf("                  / \'    ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
     }
