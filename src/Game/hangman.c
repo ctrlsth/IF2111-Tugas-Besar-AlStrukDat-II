@@ -2,12 +2,11 @@
 #include <time.h>
 #include "../boolean.h"
 
-const int IDX_UNDEF = -1;
 const char MARK = '_';
 const int KESEMPATAN = 10;
 
 typedef struct {
-    char kata[KESEMPATAN];
+    char* kata[KESEMPATAN];
     int panjang;
 } List;
 
@@ -259,10 +258,10 @@ void DigitBenar(List LSoal, char huruf, List Lsalah, List Lbenar){
     }
 }
 
-void PrintList(List *L){
+void PrintList(List L){
     int i;
-    for(i=0;i<(*L).panjang;i++){
-        printf("%c", (*L).kata[i]);
+    for(i=0;i<(L).panjang;i++){
+        printf("%c", (L).kata[i]);
     }
 }
 
@@ -270,9 +269,9 @@ void TampilanGame(List Lbenar ,List *Lsalah, int urutan){
     TampilanGaris(*Lsalah);
     printSoal(urutan);
     printf("Tebakan sebelumnya : ");
-    PrintList(&Lsalah);
+    PrintList(*Lsalah);
     printf("\nKata : ");
-    PrintList(&Lbenar);
+    PrintList(Lbenar);
     printf("\nKesempatan : ");
     printf("%d", (10-(*Lsalah).panjang));
     printf("\nMasukan tebakan : ");
@@ -285,10 +284,9 @@ boolean IsFinished (List Lsalah, List Lbenar, List LSoal){
 
 int main() {
     printf("Selamat datang di game hangman!!\n Semoga kamu ga menyesal bermain game ini!!");
-    time_t waktu;
     char input;
     int point=0;
-    srand(time(&waktu));
+    srand(time(0));
     List LSoal;
     List Lsalah;
     List Lbenar;
