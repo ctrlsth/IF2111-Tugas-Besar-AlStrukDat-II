@@ -6,11 +6,7 @@ const int IDX_UNDEF = -1;
 const int KESEMPATAN = 10;
 
 typedef struct {
-    char TabWord[100];
-} word;
-
-typedef struct {
-    word kata[10];
+    char kata[100];
     int panjang;
 } ListSoal;
 
@@ -50,8 +46,13 @@ int printSoal(int urutan){
 void variasiSoal(int urutan){
     ListSoal L;
     if (urutan == 1){
-        L.kata = "TENAGA";
         L.panjang = 6;
+        L.kata[0] = "T";
+        L.kata[1] = "E";
+        L.kata[2] = "E";
+        L.kata[0] = "E";
+        L.kata[0] = "E";
+        L.kata[] = "A";
     } else if (urutan == 2){
         L.kata = "NOLEH";
         L.panjang = 5;
