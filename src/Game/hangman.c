@@ -1,52 +1,48 @@
 #include <stdio.h>
 #include <time.h>
-#include "boolean.h"
+#include "../boolean.h"
 
 const int IDX_UNDEF = -1;
 const char MARK = '_';
 const int KESEMPATAN = 10;
 
 typedef struct {
-    char kata[100];
+    char kata[KESEMPATAN];
     int panjang;
-} ListSoal;
+} List;
 
-typedef struct {
-    char huruf[26];
-    int panjang;
-    int digit[26];
-} Simpenan;
-
-void CreateSimpenan (Simpenan *S){
-    S->panjang = IDX_UNDEF;
+void CreateList1 (List *LSoal, int digit){
+    int i;
+    for(i=0;i<digit;i++){
+        LSoal->kata[i] = MARK;
+    }
 }
 
 int printSoal(int urutan){
     if (urutan == 1){
-        printf("Di rumah makan Padang, selain pakai sendok kita makan pakai?");
+        printf("Di rumah makan Padang, selain pakai sendok kita makan pakai?\n");
     } else if (urutan == 2){
-        printf("Seseorang yang memimpin sebuah desa, biasanya dipanggil pak?");
+        printf("Seseorang yang memimpin sebuah desa, biasanya dipanggil pak?\n");
     } else if (urutan == 3){
-        printf("Senikmat-nikmatnya makan di luar lebih nikmat makan di?");
+        printf("Senikmat-nikmatnya makan di luar lebih nikmat makan di?\n");
     } else if (urutan == 4){
-        printf("Ikan bernapas di air dengan?");
+        printf("Ikan bernapas di air dengan?\n");
     } else if (urutan == 5){
-        printf("Yang dibeli seorang cowok untuk pasangannya di saat Valentine biasanya?");
+        printf("Yang dibeli seorang cowok untuk pasangannya di saat Valentine biasanya?\n");
     } else if (urutan == 6){
-        printf("Seorang barber mencukur rambut pelanggan dengan?");
+        printf("Seorang barber mencukur rambut pelanggan dengan?\n");
     } else if (urutan == 7){
-        printf("Lorenzo, Marquez, Rossi kejar-kejaran, salip menyalip di?");
+        printf("Lorenzo, Marquez, Rossi kejar-kejaran, salip menyalip di?\n");
     } else if (urutan == 8){
-        printf("Burung bisa terbang karena memiliki?");
+        printf("Burung bisa terbang karena memiliki?\n");
     } else if (urutan == 9){
-        printf("Bendera NKRI warnanya?");
+        printf("Bendera NKRI warnanya?\n");
     } else if (urutan == 10){
-        printf("Galang menyimpan buku di…");
+        printf("Galang menyimpan buku di…\n");
     }
 }
 
-void variasiSoal(int urutan){
-    ListSoal L;
+void variasiSoal(int urutan, List L){
     if (urutan == 1){
         L.panjang = 6;
         L.kata[0] = "T";
@@ -129,8 +125,8 @@ void variasiSoal(int urutan){
     }
 }
 
-void TampilanGaris(Simpenan Ssalah){
-    if (Ssalah.panjang == 1){
+void TampilanGaris(List Lsalah){
+    if (Lsalah.panjang == 1){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -140,7 +136,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                                      \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 2){
+    } else if (Lsalah.panjang == 2){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -150,7 +146,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 3){
+    } else if (Lsalah.panjang == 3){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -160,7 +156,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 4){
+    } else if (Lsalah.panjang == 4){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -170,7 +166,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 5){
+    } else if (Lsalah.panjang == 5){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -180,7 +176,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 6){
+    } else if (Lsalah.panjang == 6){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -190,7 +186,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 7){
+    } else if (Lsalah.panjang == 7){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -200,7 +196,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 8){
+    } else if (Lsalah.panjang == 8){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -210,7 +206,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                          ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 9){
+    } else if (Lsalah.panjang == 9){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -220,7 +216,7 @@ void TampilanGaris(Simpenan Ssalah){
         printf("                  /       ||          \n");
         printf("                          ||          \n");
         printf("======================================\n");
-    } else if (Ssalah.panjang == 10){
+    } else if (Lsalah.panjang == 10){
         printf("======================================\n");
         printf("                                      \n");
         printf("                                      \n");
@@ -233,49 +229,88 @@ void TampilanGaris(Simpenan Ssalah){
     }
 }
 
-void TampilanGame(Simpenan Ssalah, Simpenan *Sbenar){
-    printf("Tebakan sebelumnya : ");
-
-    printf("Kata : ");
-
-    printf("Kesempatan : ");
-
-    printf("Masukan tebakan : ");
-
-    TampilanGaris(Ssalah);
-}
-
-void TampilanClue(ListSoal Soal){
-    int i;
-    for(i=0;i<Soal.panjang;i++){
-        printf("_ ");
+void DeleteAt(List *Lbenar, List LSoal, int indeks){
+    int j;
+    for(j=indeks;j<=LSoal.panjang;j++){
+        (*Lbenar).kata[j] = (*Lbenar).kata[j+1];
     }
 }
 
-int DigitBenar(ListSoal Soal, char huruf, Simpenan Sbenar, Simpenan Ssalah){
+void InsertAt(List *Lbenar, List LSoal, int indeks){
+    int j;
+    for(j=indeks;j<=LSoal.panjang;j++){
+        (*Lbenar).kata[j+1] = (*Lbenar).kata[j];
+    }
+    (*Lbenar).kata[indeks] = LSoal.kata[indeks];
+}
+
+void DigitBenar(List LSoal, char huruf, List Lsalah, List Lbenar){
     int i = 0;
-    while (i<Soal.panjang){
-        if(Soal.kata[i] == huruf){
-            printf("%c ", huruf);
-            Sbenar.panjang++;
-            Sbenar.digit[i];
+    while (i<LSoal.panjang){
+        if(LSoal.kata[i] == huruf){
+            DeleteAt(&Lbenar, LSoal, i);
+            InsertAt(&Lbenar, LSoal, i);
+            Lbenar.panjang++;
             i++;
         } else {
-            printf("%");
-            Ssalah.panjang++;
+            InsertAt(&Lsalah, LSoal, Lsalah.panjang);
+            Lsalah.panjang++;
         }
-
     }
 }
 
-boolean IsFinished (Simpenan Sbenar, Simpenan Ssalah, ListSoal Soal){
-    return (Sbenar.panjang == Soal.panjang || Ssalah.panjang > KESEMPATAN);
+void PrintList(List *L){
+    int i;
+    for(i=0;i<(*L).panjang;i++){
+        printf("%c", (*L).kata[i]);
+    }
 }
 
-void hangman(){
-    time_t waktu;
-    srand(time(&waktu));
-    ListSoal L;
-    int acakurutan = (rand()%10) + 1;
+void TampilanGame(List Lbenar ,List *Lsalah, int urutan){
+    TampilanGaris(*Lsalah);
+    printSoal(urutan);
+    printf("Tebakan sebelumnya : ");
+    PrintList(&Lsalah);
+    printf("\nKata : ");
+    PrintList(&Lbenar);
+    printf("\nKesempatan : ");
+    printf("%d", (10-(*Lsalah).panjang));
+    printf("\nMasukan tebakan : ");
+}
 
+
+boolean IsFinished (List Lsalah, List Lbenar, List LSoal){
+    return (Lbenar.panjang == LSoal.panjang || Lsalah.panjang > KESEMPATAN);
+}
+
+int main() {
+    printf("Selamat datang di game hangman!!\n Semoga kamu ga menyesal bermain game ini!!");
+    time_t waktu;
+    char input;
+    int point=0;
+    srand(time(&waktu));
+    List LSoal;
+    List Lsalah;
+    List Lbenar;
+    Lbenar.panjang = 0;
+    Lsalah.panjang = 0;
+    int urutan = (rand()%10) + 1;
+    variasiSoal(urutan, LSoal);
+    CreateList1(&LSoal, LSoal.panjang);
+    TampilanGame(Lbenar, &Lsalah, urutan);
+    scanf("%c", &input);
+    DigitBenar(LSoal, input, Lsalah, Lbenar);
+    while(!IsFinished){
+        TampilanGame(Lbenar, &Lsalah, urutan);
+        scanf("%c", &input);
+        DigitBenar(LSoal, input, Lsalah, Lbenar);
+    }
+    if (Lbenar.panjang == LSoal.panjang){
+        printf("WADAWWW.. SITU KEREN BANGET BISA MENANGIN NI GAME!!\n");
+        printf("Karena situ udh menang, aku kasi situ %d point dehhh!!\n", point);
+    } else if (Lsalah.panjang > KESEMPATAN){
+        printf("YAHAHHAA!!!\n");
+        printf("Cupssss!!\n");
+    }
+    return 0;
 }
