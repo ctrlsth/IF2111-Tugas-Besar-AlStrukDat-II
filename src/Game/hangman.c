@@ -277,6 +277,16 @@ void TampilanGame(List Lbenar ,List *Lsalah, int urutan){
     printf("\nMasukan tebakan : ");
 }
 
+boolean isExist (char huruf, List Lsalah, List Lbenar, List LSoal){
+    boolean found = false;
+    int i=0;
+    while (i<KESEMPATAN && !found){
+        if (huruf == Lsalah.kata[i] || huruf == Lbenar.kata[i]){
+            found = true;
+        }
+    }
+    return found;
+}
 
 boolean IsFinished (List Lsalah, List Lbenar, List LSoal){
     return (Lbenar.panjang == LSoal.panjang || Lsalah.panjang > KESEMPATAN);
