@@ -207,8 +207,8 @@ void TampilanGaris(List Lsalah){
         printf("======================================\n");
     } else if (Lsalah.panjang == 9){
         printf("======================================\n");
-        printf("                                      \n");
-        printf("                                      \n");
+        printf("        EHH KOK GUA DISINI!!??        \n");
+        printf("             TOLONGGG!!!              \n");
         printf("                   -------||          \n");
         printf("                   O      ||          \n");
         printf("                  /|\'    ||          \n");
@@ -237,8 +237,12 @@ void DeleteAt(List *Lbenar, List LSoal, int indeks){
 
 void InsertAt(List *Lbenar, List LSoal, int indeks){
     int j;
+    List Lbenartemp;
     for(j=indeks;j<=LSoal.panjang;j++){
-        (*Lbenar).kata[j+1] = (*Lbenar).kata[j];
+        (Lbenartemp).kata[j] = (*Lbenar).kata[j];
+    }
+    for(j=indeks;j<=LSoal.panjang;j++){
+        (*Lbenar).kata[j+1] = (Lbenartemp).kata[j];
     }
     (*Lbenar).kata[indeks] = LSoal.kata[indeks];
 }
