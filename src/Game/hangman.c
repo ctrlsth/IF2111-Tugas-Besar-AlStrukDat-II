@@ -217,13 +217,13 @@ void TampilanGaris(List Lsalah){
         printf("======================================\n");
     } else if (Lsalah.panjang == 10){
         printf("======================================\n");
-        printf("                                      \n");
-        printf("                                      \n");
-        printf("                   -------||          \n");
-        printf("                   O      ||          \n");
-        printf("                  /|\'    ||          \n");
-        printf("                  / \'    ||          \n");
-        printf("                          ||          \n");
+        printf("            TIIIIDAAAAKKK!!!!!!       \n");
+        printf("        AARGHHH!!     AAAAAARGHHH!!   \n");
+        printf("     AAAARGHHH!!   -------||  ARGHH!  \n");
+        printf("        AARGHHH!!  O      || ARGHH!   \n");
+        printf("     AAAARGHHH!!  /|\'    ||  ARGHH!  \n");
+        printf("        AARGHHH!! / \'    || ARGHH!   \n");
+        printf("     AAAARGHHH!!          ||  ARGHH!  \n");
         printf("======================================\n");
     }
 }
@@ -250,11 +250,11 @@ void DigitBenar(List LSoal, char huruf, List Lsalah, List Lbenar){
             DeleteAt(&Lbenar, LSoal, i);
             InsertAt(&Lbenar, LSoal, i);
             Lbenar.panjang++;
-            i++;
         } else {
             InsertAt(&Lsalah, LSoal, Lsalah.panjang);
             Lsalah.panjang++;
         }
+        i++;
     }
 }
 
@@ -283,6 +283,7 @@ boolean isExist (char huruf, List Lsalah, List Lbenar, List LSoal){
         if (huruf == Lsalah.kata[i] || huruf == Lbenar.kata[i]){
             found = true;
         }
+        i++;
     }
     return found;
 }
@@ -311,12 +312,12 @@ int main() {
         scanf("MASUKAN TEBAKAN : %c\n", &input);
     }
     DigitBenar(LSoal, input, Lsalah, Lbenar);
-    while(!IsFinished){
+    while(!IsFinished(Lsalah, Lbenar, LSoal)){
         TampilanGame(Lbenar, &Lsalah, urutan);
         scanf("MASUKAN TEBAKAN : %c\n", &input);
-        while(!((int) input >= 'A' && (int) input <= 'Z') && !(isExist(input, Lsalah, Lbenar, LSoal))){
+        while(!((int) input >= 'A' && (int) input <= 'Z') || (isExist(input, Lsalah, Lbenar, LSoal))){
             printf("Sori bro, coba situ input hurufnya di capslocsk dan tentu inputnya harus huruf yakk!\n");
-            printf("btw, jangan input huruf yang udh pernah ditebak yakk!!!\n");
+            printf("btw, inputnya jangan huruf yang udh pernah ditebak yakk!!!\n");
             scanf("MASUKAN TEBAKAN : %c\n", &input);
         }
         DigitBenar(LSoal, input, Lsalah, Lbenar);
