@@ -274,7 +274,6 @@ void TampilanGame(List Lbenar ,List *Lsalah, int urutan){
     PrintList(Lbenar);
     printf("\nKesempatan : ");
     printf("%d", (10-(*Lsalah).panjang));
-    printf("\nMasukan tebakan : ");
 }
 
 boolean isExist (char huruf, List Lsalah, List Lbenar, List LSoal){
@@ -306,11 +305,20 @@ int main() {
     variasiSoal(urutan, LSoal);
     CreateList1(&LSoal, LSoal.panjang);
     TampilanGame(Lbenar, &Lsalah, urutan);
-    scanf("%c", &input);
+    scanf("\nMASUKAN TEBAKAN : %c\n", &input);
+    while(!((int) input >= 'A' && (int) input <= 'Z')){
+        printf("Sori bro, coba situ input hurufnya di capslocsk dan tentu inputnya harus huruf yakk!\n");
+        scanf("MASUKAN TEBAKAN : %c\n", &input);
+    }
     DigitBenar(LSoal, input, Lsalah, Lbenar);
     while(!IsFinished){
         TampilanGame(Lbenar, &Lsalah, urutan);
-        scanf("%c", &input);
+        scanf("MASUKAN TEBAKAN : %c\n", &input);
+        while(!((int) input >= 'A' && (int) input <= 'Z') && !(isExist(input, Lsalah, Lbenar, LSoal))){
+            printf("Sori bro, coba situ input hurufnya di capslocsk dan tentu inputnya harus huruf yakk!\n");
+            printf("btw, jangan input huruf yang udh pernah ditebak yakk!!!\n");
+            scanf("MASUKAN TEBAKAN : %c\n", &input);
+        }
         DigitBenar(LSoal, input, Lsalah, Lbenar);
     }
     if (Lbenar.panjang == LSoal.panjang){
