@@ -1,28 +1,27 @@
 /* File : stack.h */
 /* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
 /* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
-#ifndef stackt_H
-#define stackt_H
+/* Implementasi dalam bahasa C dengan alokasi dinamik */
+#ifndef _STACK_H
+#define _STACK_H
 
-#include "../Boolean/boolean.h"
-#include "../Simulator/simulator.h"
-#include "../Queue/prioqueue.h"
-#include "../Time/time.h"
-#include "../Simulator/simulator.h"
+#include "../boolean.h"
+#include "mesinkata.h" 
+
 
 #define Nil -1
-#define MaxElStack 100
+#define MaxElStack 1
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef Simulator stacktype;
+typedef Word stacktype;
 typedef int address; /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct
 {
-    stacktype T[MaxElStack]; /* tabel penyimpan elemen */
+    stacktype* T; /* tabel penyimpan elemen */
+    int Capacity;
     address TOP;             /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -66,4 +65,7 @@ void Pop(Stack *S, stacktype *X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+void DeleteStackAt(Stack *S, int i);
+
+void DeleteGameHistory(Stack *S, Word game);
 #endif
