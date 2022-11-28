@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../boolean.h"
+#include "../ADT/mesinkata.h"
 
 #define IDX_UNDEF -1
-#define MARK '_'
+#define MARKK '_'
 #define KESEMPATAN 10
 
 typedef struct {
@@ -16,7 +17,7 @@ typedef struct {
 void CreateList(List *LSoal, int digit){
     int i;
     for(i=0;i<digit;i++){
-        LSoal->kata[i] = MARK;
+        LSoal->kata[i] = MARKK;
     }
 }
 
@@ -382,7 +383,6 @@ int main (){
     List LSoal;
     List Lbenar;
     List Lsalah;
-    char input;
     srand(time(0));
     int point;
     int urutan = (rand()%10) + 1;
@@ -402,23 +402,56 @@ int main (){
     // printf("%d\n", Lsalah.panjang);
     TampilanGame(Lbenar, Lsalah, urutan, LSoal);
 
+    printf("  /$$$$$$            /$$                                     /$$           /$$                          \n");
+    printf(" /$$__  $$          | $$                                    | $$          | $$                          \n");
+    printf("| $$  \__/  /$$$$$$ | $$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$        | $$$$$$$   /$$$$$$   /$$$$$$ \n");
+    printf("|  $$$$$$  /$$__  $$| $$ |____  $$| $$_  $$_  $$ |____  $$|_  $$_/        | $$__  $$ /$$__  $$ /$$__  $$\n");
+    printf(" \____  $$| $$$$$$$$| $$  /$$$$$$$| $$ \ $$ \ $$  /$$$$$$$  | $$          | $$  \ $$| $$$$$$$$| $$  \__/\n");
+    printf(" /$$  \ $$| $$_____/| $$ /$$__  $$| $$ | $$ | $$ /$$__  $$  | $$ /$$      | $$  | $$| $$_____/| $$      \n");
+    printf("|  $$$$$$/|  $$$$$$$| $$|  $$$$$$$| $$ | $$ | $$|  $$$$$$$  |  $$$$/      | $$$$$$$/|  $$$$$$$| $$      \n");
+    printf(" \______/  \_______/|__/ \_______/|__/ |__/ |__/ \_______/   \___/        |_______/  \_______/|__/      \n");
+    printf("\n");
+    printf("\n");
+    printf("             /$$   /$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$      /$$  /$$$$$$  /$$   /$$                   \n");
+    printf("            | $$  | $$ /$$__  $$| $$$ | $$ /$$__  $$| $$$    /$$$ /$$__  $$| $$$ | $$                   \n");
+    printf("            | $$  | $$| $$  \ $$| $$$$| $$| $$  \__/| $$$$  /$$$$| $$  \ $$| $$$$| $$                   \n");
+    printf("            | $$$$$$$$| $$$$$$$$| $$ $$ $$| $$ /$$$$| $$ $$/$$ $$| $$$$$$$$| $$ $$ $$                   \n");
+    printf("            | $$__  $$| $$__  $$| $$  $$$$| $$|_  $$| $$  $$$| $$| $$__  $$| $$  $$$$                   \n");
+    printf("            | $$  | $$| $$  | $$| $$\  $$$| $$  \ $$| $$\  $ | $$| $$  | $$| $$\  $$$                   \n");
+    printf("            | $$  | $$| $$  | $$| $$ \  $$|  $$$$$$/| $$ \/  | $$| $$  | $$| $$ \  $$                   \n");
+    printf("            |__/  |__/|__/  |__/|__/  \__/ \______/ |__/     |__/|__/  |__/|__/  \__/                   \n");
+    printf("\n");
+    printf("\n");
+    printf("                                         /$$           /$$ /$$                                          \n");
+    printf("                                        |__/          | $$| $$                                          \n");
+    printf("                                /$$$$$$  /$$  /$$$$$$ | $$| $$                                          \n");
+    printf("                               /$$__  $$| $$ |____  $$| $$| $$                                          \n");
+    printf("                              | $$  \__/| $$  /$$$$$$$|__/|__/                                          \n");
+    printf("                              | $$      | $$ /$$__  $$                                                  \n");
+    printf("                              | $$      | $$|  $$$$$$$ /$$ /$$                                          \n");
+    printf("                              |__/      |__/ \_______/|__/|__/                                          \n");
+    printf("\n");
+    printf("\n");
     printf("Masukan Tebakanmu : ");
-    scanf("%c", &input);
+    STARTCMD(true);
+    Word Uinput = currentCommand;
+    char input = Uinput.TabChar[0];
+    //scanf("%c", &input);
     printf("\n");
     //printf("%c", input);
     while(!(input >= 'A' && input <= 'Z')){
         printf("******************************************************************************************\n");
         printf("Sori bro, coba situ input hurufnya di capslocskin dlu truss inputnya harus berupa huruf yakk!\n");
-        printf("Masukan Tebakan S : ");
+        printf("Masukan Tebakanmu : ");
         scanf("%c", &input);
         printf("\n");
     }
     DigitBenar(&LSoal, input, &Lsalah, &Lbenar);
     while(!IsFinished(Lsalah, Lbenar, LSoal)){
         TampilanGame(Lbenar, Lsalah, urutan, LSoal);
-        printf("Masukan Tebakan T : ");
+        printf("Masukan Tebakanmu : ");
         scanf(" %c", &input);
-        printf("%c\n", input);
+        printf("\n");
         while(!(input >= 'A' && input <= 'Z') || (isExist(input, Lsalah, Lbenar, LSoal))){
             printf("******************************************************************************************\n");
             if((isExist(input, Lsalah, Lbenar, LSoal))){
@@ -427,7 +460,7 @@ int main (){
             else{
                 printf("Sori bro, coba situ input hurufnya di capslocsk dan tentu inputnya harus huruf yakk!\n");
             }
-            printf("Masukan Tebakan : ");
+            printf("Masukan Tebakanmu : ");
             scanf(" %c", &input);
             printf("\n");       
         }
