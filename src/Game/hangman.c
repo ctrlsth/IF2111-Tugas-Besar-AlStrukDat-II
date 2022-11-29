@@ -400,8 +400,8 @@ int main (){
     // printf("%d\n", LSoal.panjang);
     // printf("%d\n", Lbenar.panjang);
     // printf("%d\n", Lsalah.panjang);
-    TampilanGame(Lbenar, Lsalah, urutan, LSoal);
 
+    printf("\n");
     printf("  /$$$$$$            /$$                                     /$$           /$$                          \n");
     printf(" /$$__  $$          | $$                                    | $$          | $$                          \n");
     printf("| $$  \__/  /$$$$$$ | $$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$        | $$$$$$$   /$$$$$$   /$$$$$$ \n");
@@ -432,6 +432,8 @@ int main (){
     printf("                              |__/      |__/ \_______/|__/|__/                                          \n");
     printf("\n");
     printf("\n");
+    
+    TampilanGame(Lbenar, Lsalah, urutan, LSoal);
     printf("Masukan Tebakanmu : ");
     STARTCMD(true);
     Word Uinput = currentCommand;
@@ -442,6 +444,7 @@ int main (){
     while(!(input >= 'A' && input <= 'Z')){
         printf("******************************************************************************************\n");
         printf("Sori bro, coba situ input hurufnya di capslocskin dlu truss inputnya harus berupa huruf yakk!\n");
+        printf("******************************************************************************************\n");
         printf("Masukan Tebakanmu : ");
         scanf("%c", &input);
         printf("\n");
@@ -460,6 +463,7 @@ int main (){
             else{
                 printf("Sori bro, coba situ input hurufnya di capslocsk dan tentu inputnya harus huruf yakk!\n");
             }
+            printf("******************************************************************************************\n");
             printf("Masukan Tebakanmu : ");
             scanf(" %c", &input);
             printf("\n");       
@@ -469,7 +473,7 @@ int main (){
 
     if(Lbenar.panjang == 0){
         printf("WADAWWW.. SITU KEREN BANGET BISA MENANGIN NI GAME!!\n");
-        printf("Karena situ udh menang, aku kasi situ %d point dehhh!!\n", point);
+        printf("Karena situ udh menang, aku kasi situ %d point dehhh yakk!!\n", point);
     } else if(Lsalah.panjang > KESEMPATAN){
         printf("YAHAHHAA!!!\n");
         printf("MAAF ANDA KURANG BERUNTUNG. SARAN KAMI SIH COBA LAGI (TAUN DPN YA!!)");
