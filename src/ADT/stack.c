@@ -1,94 +1,102 @@
-/* File : stack.c */
-/* Implementasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+// NIM              : 18221171
+// Nama             : Hans Stephano E
+// Tanggal          : 21 Oktober 2022
+// Topik praktikum  : Pra-Praktikum 7 - #1
+// Deskripsi        : Implementasi "stack.h"
 
+/* File : stack.h */
+/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+/* TOP adalah alamat elemen puncak */
+/* Implementasi dalam bahasa C dengan alokasi statik */
+
+#include <stdio.h>
 #include "stack.h"
+#include "../boolean.h"
+
+// #define StackNil -1
+// #define MaxEl 100
+// /* StackNil adalah stack dengan elemen kosong . */
+
+// typedef int infostack;
+// typedef int address;   /* indeks tabel */
+
+// /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
+// /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
+// typedef struct { 
+//   infostack T[MaxEl]; /* tabel penyimpan elemen */
+//   address TOP;  /* alamat TOP: elemen puncak */
+// } Stack;
+// /* Definisi stack S kosong : S.TOP = StackNil */
+// /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
+// /* Jika S adalah Stack maka akses elemen : */
+//    /* S.T[(S.TOP)] untuk mengakses elemen TOP */
+//    /* S.TOP adalah alamat elemen TOP */
+
+// /* Definisi akses dengan Selektor : Set dan Get */
+// #define Top(S) (S).TOP
+// #define InfoTop(S) (S).T[(S).TOP]
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S)
+void CreateEmptyStack(Stack *S)
+/* I.S. sembarang; */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
+/* jadi indeksnya antara 0.. MaxEl */
+/* Ciri stack kosong : TOP bernilai StackNil */
 {
-    /* I.S. sembarang; */
-    /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStack */
-    /* jadi indeksnya antara 0.. MaxElStack */
-    /* Ciri stack kosong : TOP bernilai Nil */
-    // KAMUS
-
-    // ALGORITMA
-    Top(*S) = Nil;
-}
-
-void MakeEmptyStack(Stack *S)
-{
-    /* I.S. S sudah terdefinisi sebelumnya */
-    /* F.S. Menghapus semua elemen stack dan mendealokasi elemen-elemen stack
-            S menjadi kosong */
-
-    /* KAMUS */
-    stacktype pop;
-
-    /* ALGORITMA */
-    while (!IsEmptyStack(*S))
-    {
-        Pop(S, &pop);
-        DeAlokasi(&INVENTORY(pop));
-        // DeAlokasi(&DELIVERY(pop));
-        dealocateList(&EVENT_NOTIF(NOTIFICATION(pop)));
-    }
-
-    Top(*S) = Nil;
+    Top(*S) = StackNil;
 }
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmptyStack(Stack S)
+boolean IsStackEmpty(Stack S)
+/* Mengirim true jika Stack kosong: lihat definisi di atas */
 {
-    /* Mengirim true jika Stack kosong: lihat definisi di atas */
-
-    // KAMUS
-
-    // ALGORITMA
-    return Top(S) == Nil;
+    return (Top(S) == StackNil);
 }
-boolean IsFullStack(Stack S)
+boolean IsStackFull(Stack S)
+/* Mengirim true jika tabel penampung nilai elemen stack penuh */
 {
-    /* Mengirim true jika tabel penampung nilai elemen stack penuh */
-
-    // KAMUS
-
-    // ALGORITMA
-    return Top(S) == MaxElStack - 1;
+    return (Top(S) == (MaxEl-1));
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack *S, stacktype X)
+void Push(Stack * S, infostack X)
+/* Menambahkan X sebagai elemen Stack S. */
+/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
+/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 {
-    /* Menambahkan X sebagai elemen Stack S. */
-    /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
-    /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
-
-    // KAMUS
-
-    // ALGORITMA
-    if (IsEmptyStack(*S))
+    if (IsStackEmpty(*S))
     {
         Top(*S) = 0;
+        InfoTop(*S) = X;
     }
     else
     {
-        Top(*S) += 1;
+        if (!IsStackFull(*S))
+        {
+            Top(*S) += 1;
+            InfoTop(*S) = X;
+        }
     }
-    InfoTop(*S) = X;
+
+    // Top(*S) += 1;
+    // InfoTop(*S) = X;
+
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack *S, stacktype *X)
+void Pop(Stack * S, infostack* X)
+/* Menghapus X dari Stack S. */
+/* I.S. S  tidak mungkin kosong */
+/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 {
-    /* Menghapus X dari Stack S. */
-    /* I.S. S  tidak mungkin kosong */
-    /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-
-    // KAMUS
-
-    // ALGORITMA
-    *X = InfoTop(*S);
+    (*X) = InfoTop(*S);
     Top(*S) -= 1;
+
+    /*
+    if (Top(*S) < 0)
+    {
+        Top(*S) = StackNil;
+    }
+    */
 }

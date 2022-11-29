@@ -1,74 +1,86 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef map_H
+#define map_H
+#include <stdio.h>
+#include "../boolean.h"
+#include "mesinkata.h"
 
-#include "boolean.h"
-#include "point.h"
-#include "charmatrix.h"
+/* MODUL Map
+Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
+*/
 
-/* *** Definisi Tipe Makanan *** */
+// #define false 0
+// #define true 1
+#define Nil 0
+#define MaxMapEl 100
+#define MaxListEl 20
+
+// typedef int bool;
+typedef Word keytype;
+typedef int valuetype;
+typedef int address;
+
 typedef struct
 {
-    CharMatrix map;
-    POINT B;
-    POINT F;
-    POINT C;
-    POINT T;
-    POINT M;
+	keytype Key;
+	valuetype Value;
+} mapinfo;
+
+typedef struct
+{
+	mapinfo Elements[MaxMapEl];
+	address Count;
 } Map;
 
-/* *** SELEKTOR *** */
-#define MAP(m) (m).map
-#define B(m) (m).B
-#define F(m) (m).F
-#define C(m) (m).C
-#define T(m) (m).T
-#define M(m) (m).M
+typedef struct
+{
+	Map board[MaxListEl];
+	address Num;
+} ListOfMap;
 
-extern Map map;
+/* Definisi Map M kosong : M.Count = Nil */
+/* M.Count = jumlah element Map */
+/* M.Elements = tempat penyimpanan element Map */
 
-/* *** KONSTRUKTOR *** */
-void CreateMap(CharMatrix m, POINT B, POINT F, POINT C, POINT T, POINT M);
-/* I.S. Sebuah matriks karakter m terdefinisi */
-/* F.S. Terbentuk map*/
+/* ********* Prototype ********* */
 
-/* *** VALIDASI *** */
-boolean isBoilLoc(POINT p);
-/* Mengembalikan true jika p merupakan lokasi aksi BOIL */
+/* *** Konstruktor/Kreator *** */
+void CreateEmptyMap(Map *M);
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah Map M kosong berkapasitas MaxMapEl */
+/* Ciri Map kosong : count bernilai Nil */
 
-boolean isFryLoc(POINT p);
-/* Mengembalikan true jika p merupakan lokasi aksi Fry */
+/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+boolean IsMapEmpty(Map M);
+/* Mengirim true jika Map M kosong*/
+/* Ciri Map kosong : count bernilai Nil */
 
-boolean isChopLoc(POINT p);
-/* Mengembalikan true jika p merupakan lokasi aksi Chop */
+boolean IsMapFull(Map M);
+/* Mengirim true jika Map M penuh */
+/* Ciri Map penuh : count bernilai MaxMapEl */
 
-boolean isTelephoneLoc(POINT p);
-/* Mengembalikan true jika p merupakan lokasi aksi Telephone */
+/* ********** Operator Dasar Map ********* */
+valuetype Value(Map M, keytype k);
+/* Mengembalikan nilai value dengan key k dari M */
 
-boolean isMixLoc(POINT p);
-/* Mengembalikan true jika lokasi aksi Mix berada di sekitar p*/
+void MapValIns(Map *M, keytype k, valuetype v);
+/* Menambahkan Elmt sebagai elemen Map M. */
+/* I.S. M mungkin kosong, M tidak penuh
+        M mungkin sudah beranggotakan v dengan key k */
+/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 
-boolean isBoilAdj(POINT p);
-/* Mengembalikan true jika lokasi aksi BOILberada di sekitar p */
+void MapValDel(Map *M, keytype k);
+/* Menghapus Elmt dari Map M. */
+/* I.S. M tidak kosong
+        element dengan key k mungkin anggota / bukan anggota dari M */
+/* F.S. element dengan key k bukan anggota dari M */
 
-boolean isFryAdj(POINT p);
-/* Mengembalikan true jika lokasi aksi Fry berada di sekitar p*/
+boolean IsMapMember(Map M, keytype k);
+/* Mengembalikan true jika k adalah member dari M */
 
-boolean isChopAdj(POINT p);
-/* Mengembalikan true jika lokasi aksi Chopberada di sekitar p */
+void copyMap(Map S1, Map *S2);
 
-boolean isTelephoneAdj(POINT p);
-/* Mengembalikan true jika lokasi aksi Telephone berada di sekitar p */
+void CreateEmptyMapList(ListOfMap *LM);
 
-boolean isMixAdj(POINT p);
-/* Mengembalikan true jika lokasi aksi Mix berada di sekitar p*/
-
-/* *** INPUT/ OUTPUT *** */
-void PrintMap(POINT locSimulator);
-/* I.S. Sebuah Map map terdefinisi */
-/* F.S. Map ditampilkan di layar */
-
-void PrintCommand(POINT p);
-/* I.S. Sebuah Map map terdefinisi dan sebuah POINT p terdefinisi */
-/* F.S. Sabuah command ditampilkan ke layar */
+void SortByVal(Map *M);
 
 #endif

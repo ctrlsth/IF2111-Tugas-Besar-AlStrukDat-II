@@ -1,159 +1,116 @@
-#include "set.h"
 #include <stdio.h>
+#include "mesinkata.h"
+#include "set.h"
 
-void CreateSet(Set *s)
+/* *** Konstruktor/Kreator *** */
+void CreateEmptySet(Set *S)
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah Set S kosong berkapasitas MaxSetEl */
+/* Ciri Set kosong : count bernilai Nil */
 {
-    /* I.S. sembarang; */
-    /* F.S. Membuat sebuah set S yang kosong berkapasitas CAPACITY*/
-    /* jadi indeksnya antara 0..CAPACITY */
-    /* Ciri set kosong : semua elemennya bernilai 0 */
-    LENGTH(*s) = 0;
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        (*s).T[i] = 0;
-    }
-}
-/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmptySet(Set s)
-{
-    boolean empty = true;
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        if (s.T[i] != 0)
-        {
-            empty = false;
-        }
-    }
-    return empty;
-}
-/* Mengirim true jika Set kosong: lihat definisi di atas */
-
-int lengthSet(Set s)
-{
-    /*Mengirimkan banyaknya elemen S*/
-    int count = 0;
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        if (s.T[i] == 1)
-        {
-            count++;
-        }
-    }
-    return count;
+    S->Count = Nil;
 }
 
-void addSet(Set *s, int id, ListStatik l)
+/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+boolean IsSetEmpty(Set S)
+/* Mengirim true jika Set S kosong*/
+/* Ciri Set kosong : count bernilai Nil */
 {
-    /* Menambahkan X sebagai elemen Set S. */
-    int index = indexOf(l, id, true);
-    (*s).T[index] = 1;
-    LENGTH(*s)
-    ++;
-}
-void removeSet(Set *s, int id, ListStatik l)
-{
-    /* Menghapus elemen x dari Set S*/
-    int index = indexOf(l, id, true);
-    (*s).T[index] = 0;
-    LENGTH(*s)
-    --;
+    return S.Count == Nil;
 }
 
-boolean isInSet(Set s, int id, ListStatik l)
+boolean IsSetFull(Set S)
+/* Mengirim true jika Set S penuh */
+/* Ciri Set penuh : count bernilai MaxSetEl */
 {
-    /* Mengembalikan true jika makanan x ada di dalam Set S*/
-    int index = indexOf(l, id, true);
-    return s.T[index] == 1;
-}
-boolean isEqualSet(Set s1, Set s2)
-{
-    /* Mengembalikan true jika s1 dan s2 memiliki elemen yang sama*/
-    boolean equal = true;
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        if (s1.T[i] != s2.T[i])
-        {
-            equal = false;
-        }
-    }
-    return equal;
-}
-Set unionSet(Set s1, Set s2)
-{
-    /* Menghasilkan gabungan s1 dan s2 */
-    Set s3;
-    CreateSet(&s3);
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        if (s1.T[i] == 1 || s1.T[i] == 1)
-        {
-            s3.T[i] = 1;
-            LENGTH(s3)
-            ++;
-        }
-    }
-    return s3;
+    return S.Count == MaxSetEl;
 }
 
-Set intersectionSet(Set s1, Set s2)
+/* ********** Operator Dasar Set ********* */
+void InsertSetEl(Set *S, setinfo Elmt)
+/* Menambahkan Elmt sebagai elemen Set S. */
+/* I.S. S mungkin kosong, S tidak penuh
+        S mungkin sudah beranggotakan Elmt */
+/* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 {
-    /* Menghasilkan irisan S1 dan S2*/
-    Set s3;
-    CreateSet(&s3);
-    for (int i = 0; i < CAPACITY; i++)
+    if (IsSetMember(*S, Elmt))
     {
-        if (s1.T[i] == 1 && s2.T[i] == 1)
-        {
-            s3.T[i] = 1;
-            LENGTH(s3)
-            ++;
-        }
+        return;
     }
-    return s3;
-}
-Set setDifferenceSet(Set s1, Set s2)
-{
-    /* Menghasilkan s1 dikurangi s2 */
-
-    Set s3;
-    CreateSet(&s3);
-    for (int i = 0; i < CAPACITY; i++)
-    {
-        if (s1.T[i] == 1 && s2.T[i] == 0)
-        {
-            s3.T[i] = 1;
-            LENGTH(s3)
-            ++;
-        }
-    }
-    return s3;
+    S->PlayerName[S->Count] = Elmt;
+    S->Count++;
 }
 
-void copySet(Set s1, Set *s2)
+void DeleteSetEl(Set *S, setinfo Elmt)
+/* Menghapus Elmt dari Set S. */
+/* I.S. S tidak kosong
+        Elmt mungkin anggota / bukan anggota dari S */
+/* F.S. Elmt bukan anggota dari S */
 {
-    /* Mengcopy set s1 ke set s2 */
-    CreateSet(s2);
-    for (int i = 0; i < CAPACITY; i++)
+    boolean found = false;
+    address idx = 0, iterator;
+    if (!IsSetMember(*S, Elmt))
     {
-        if (s1.T[i] == 1)
+        return;
+    }
+    while (!found && idx < S->Count)
+    {
+        if (compare2Word(S->PlayerName[idx], Elmt))
         {
-            (*s2).T[i] = 1;
-            LENGTH(*s2)
-            ++;
+            found = true;
+        }
+        else
+        {
+            idx++;
         }
     }
+    for (iterator = idx + 1; iterator < S->Count; iterator++)
+    {
+        S->PlayerName[iterator - 1] = S->PlayerName[iterator];
+    }
+    S->Count--;
 }
 
-boolean isSubset(Set s1, Set s2)
+boolean IsSetMember(Set S, setinfo Elmt)
+/* Mengembalikan true jika Elmt adalah member dari S */
 {
-    /* Mengembalikan true jika s1 adalah subset dari s2 */
-    boolean subset = true;
-    for (int i = 0; i < CAPACITY; i++)
+    if (IsSetEmpty(S))
     {
-        if (s1.T[i] == 1 && s2.T[i] == 0)
+        return false;
+    }
+
+    boolean found = false;
+    address idx = 0, iterator;
+    while (!found && idx < S.Count)
+    {
+        if (compare2Word(S.PlayerName[idx], Elmt))
         {
-            subset = false;
+            found = true;
+        }
+        else
+        {
+            idx++;
         }
     }
-    return subset;
+    return found;
+}
+
+void CreateEmptySetList(ListOfSet *LS)
+{
+    int i;
+    for (i = 0; i < (LS->Num); i++)
+    {
+        CreateEmptySet(&(LS->GameSet[i]));
+    }
+    LS->Num = 6;
+}
+
+void SortSetByMap(Set *S, Map M)
+{
+    CreateEmptySet(S);
+    int i;
+    for (i = 0; i < M.Count; i++)
+    {
+        InsertSetEl(S, M.Elements[i].Key);
+    }
 }
