@@ -6,11 +6,11 @@
 #include "../src/ADT/stack.h"
 
 
-void piringan(Stack S, int x, int wmax);
+boolean finalGame(Stack S);
 
 void showTiang(Stack S1, Stack S2, Stack S3);
 
-boolean finalGame(Stack S);
+void piringan(Stack S, int x, int wmax);
 
 void proceedTiang(Stack *S1, Stack *S2);
 
