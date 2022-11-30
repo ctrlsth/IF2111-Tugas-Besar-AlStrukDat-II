@@ -59,7 +59,7 @@ void piringan(Stack S, int a, int wmax){
         for (int k=0; k<wmax/2; k++){
             printf(" ");
         }
-        printf("|");
+        printDelay("|");
         for (int k=0; k<wmax/2; k++){
             printf(" ");
         }
@@ -67,13 +67,6 @@ void piringan(Stack S, int a, int wmax){
     for (int k=0; k<3; k++){
         printf(" ");
     }
-}
-
-
-void proceedTiang(Stack *S1, Stack *S2){
-    infostack X;
-    Pop(S1, &X);
-    Push(S2, X);
 }
 
 void towerOfHanoi(){
