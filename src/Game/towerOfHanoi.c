@@ -2,6 +2,44 @@
 #include "towerOfHanoi.h"
 #include "../src/ADT/mesinkata.h"
 
+boolean finalGame(Stack S){
+    Stack tes;
+    int a;
+    infotype x;
+    boolean finalGame = true;
+    CreateEmptyStack(&tes);
+
+    for(a=5; a>0 ; a--){
+        Push(&tes,a);
+    }
+
+    while (!IsStackEmpty(tes) && !IsStackEmpty(S)){
+        if (InfoTop(S) != InfoTop(tes)){
+            finalGame = false;
+        }
+        Pop(&S, &x);
+        Pop(&tes, &x);
+    }
+
+    if (IsStackEmpty(S) && IsStackEmpty(tes)){
+        return finalGame;
+    }
+    else{
+        return false;
+    }
+}
+
+void showTiang(Stack S1, Stack S2, Stack S3){
+    int a;
+    for (a=5; a>=0; a--){
+        piringan(S1, a, 9);
+        piringan(S2, a, 9);
+        piringan(S3, a, 9);
+        printf("\n");
+    }
+    printf("\n");
+}
+
 void piringan(Stack S, int a, int wmax){
     if (a<=Top(S)){
         int pjg;
@@ -31,43 +69,6 @@ void piringan(Stack S, int a, int wmax){
     }
 }
 
-void showTiang(Stack S1, Stack S2, Stack S3){
-    int a;
-    for (a=5; a>=0; a--){
-        piringan(S1, a, 9);
-        piringan(S2, a, 9);
-        piringan(S3, a, 9);
-        printf("\n");
-    }
-    printf("\n");
-}
-
-boolean finalGame(Stack S){
-    Stack tes;
-    int a;
-    infotype x;
-    boolean finalGame = true;
-    CreateEmptyStack(&tes);
-
-    for(a=5; a>0 ; a--){
-        Push(&tes,a);
-    }
-
-    while (!IsStackEmpty(tes) && !IsStackEmpty(S)){
-        if (InfoTop(S) != InfoTop(tes)){
-            finalGame = false;
-        }
-        Pop(&S, &x);
-        Pop(&tes, &x);
-    }
-
-    if (IsStackEmpty(S) && IsStackEmpty(tes)){
-        return finalGame;
-    }
-    else{
-        return false;
-    }
-}
 
 void proceedTiang(Stack *S1, Stack *S2){
     infostack X;
@@ -95,19 +96,21 @@ void towerOfHanoi(){
     }
 
     while (!finalGame(tower3)){
-        printf("Moves = %d\n", move);
-        printf("Minimum moves = 31\n\n");
+        printf("Gerakan = %d\n", move);
+        printf("Gerakan minimal = 31\n\n");
 
         showTiang(tiang1, tiang2, tiang3);
 
         while(!cekinput){
             printf("Tiang asal = ");
-            STARTCMD();
-            start = currentCommand;
+            STARTCMD(false);
+            start = toInt(currentCommand);
             printf("Tiang akhir = ");
-            STARTCMD();
-            end = currentCommand;
+            STARTCMD(false);
+            end = toInt(currentCommand);
             printf("\n");
+
+            printf("Memindahkan piringan ke tiang %d ...", end);
             if (start >=1 && start <=3 && end >=1 && end <=3){
                 if (start != end){
                     if (start == 1){
@@ -116,27 +119,35 @@ void towerOfHanoi(){
                         }
                         else if (end == 2){
                             if (IsStackEmpty(tiang2)){
-                                proceedTiang(&tiang1, &tiang2);
+                                infostack X;
+                                Pop (tiang1, &X);
+                                Push(tiang2, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang1) > InfoTop(tiang2)){
                                 printf("Input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n");
                             }
                             else{
-                                proceedTiang(&tiang1, &tiang2);
+                                infostack X;
+                                Pop (tiang1, &X);
+                                Push(tiang2, X);
                                 cekinput = true;
                             }
                         }
                         else if (end == 3){
                             if (IsStackEmpty(tiang3)){
-                                proceedTiang(&tiang1, &tiang3);
+                                infostack X;
+                                Pop (tiang1, &X);
+                                Push(tiang3, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang1) > InfoTop(tiang3)){
                                 printf("Input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n");
                             }
                             else{
-                                proceedTiang(&tiang1, &tiang3);
+                                infostack X;
+                                Pop (tiang1, &X);
+                                Push(tiang3, X);
                                 cekinput = true;
                             }
                         }
@@ -147,27 +158,35 @@ void towerOfHanoi(){
                         }
                         else if (end == 1){
                             if (IsStackEmpty(tiang1)){
-                                proceedTiang(&tiang2, &tiang1);
+                                infostack X;
+                                Pop (tiang2, &X);
+                                Push(tiang1, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang2) > InfoTop(tiang1)){
                                 printf("Valid input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n")
                             }
                             else {
-                                proceedTiang(&tiang2, &tiang1);
+                                infostack X;
+                                Pop (tiang2, &X);
+                                Push(tiang1, X);
                                 cekinput = true;
                             }
                         }
                         else if (end == 3){
                             if (IsStackEmpty(tiang3)){
-                                proceedTiang(&tiang2, &tiang3);
+                                infostack X;
+                                Pop (tiang2, &X);
+                                Push(tiang3, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang2) > InfoTop(tiang3)){
                                 printf("Valid input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n")
                             }
                             else {
-                                proceedTiang(&tiang2, &tiang3);
+                                infostack X;
+                                Pop (tiang2, &X);
+                                Push(tiang3, X);
                                 cekinput = true;
                             }
                         }
@@ -178,34 +197,42 @@ void towerOfHanoi(){
                         }
                         else if (end == 1){
                             if (IsStackEmpty(tiang1)){
-                                proceedTiang(&tiang3, &tiang1);
+                                infostack X;
+                                Pop (tiang3, &X);
+                                Push(tiang1, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang3) > InfoTop(tiang1)){
                                 printf("Valid input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n")
                             }
                             else {
-                                proceedTiang(&tiang3, &tiang1);
+                                infostack X;
+                                Pop (tiang3, &X);
+                                Push(tiang1, X);
                                 cekinput = true;
                             }
                         }
                         else if (end == 2){
                             if (IsStackEmpty(tiang2)){
-                                proceedTiang(&tiang3, &tiang2);
+                                infostack X;
+                                Pop (tiang3, &X);
+                                Push(tiang2, X);
                                 cekinput = true;
                             }
                             else if (InfoTop(tiang3) > InfoTop(tiang2)){
                                 printf("Valid input tidak valid! Ukuran piringan harus lebih kecil dari piringan dibawahnya!\n\n")
                             }
                             else {
-                                proceedTiang(&tiang3, &tiang2);
+                                infostack X;
+                                Pop (tiang3, &X);
+                                Push(tiang2, X);
                                 cekinput = true;
                             }
                         }
                     }
                 }
                 else {
-                    printf("Input tidak valid, tiang awal dan tiang akhir harus berbeda! \n\n");
+                    printf("Input tidak valid, tiang awal dan tiang akhir tidak boleh sama! \n\n");
                 }
             }
             else {
@@ -232,5 +259,11 @@ void towerOfHanoi(){
     }
     showTiang(tiang1,tiang2,tiang3);
     printf("Yey! Kamu berhasil selesai memainkan game Tower of Hanoi dengan berjalan sebanyak %d langkah! \n", move);
-    printf("Nilai kamu : %d\n", finalscore);
+    printf("Skor kamu : %d\n", finalscore);
+    if (finalscore = 10){
+        printf("Wow! Kamu mendapatkan nilai tertinggi!")
+    }
+    else{
+        printf("Main lagi yuk!")
+    }
 }
